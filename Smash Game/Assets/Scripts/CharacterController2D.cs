@@ -18,10 +18,11 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero;
+    private int extraJumps;
 
 	private void Awake()
 	{
-		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
 	}
 
 
@@ -71,21 +72,29 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
 		if (jump)
 		{
-			// Add a vertical force to the player.
-            if(m_Grounded)
+            // Add a vertical force to the player.
+            if (m_Grounded)
             {
                 m_Grounded = false;
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-                canDoubleJump = true;
             }
+<<<<<<< HEAD:Smash Game/Assets/Scripts/CharacterController2D.cs
             else if(canDoubleJump)
+=======
+            else if (canDoubleJump)
+>>>>>>> 453b54d997de8a54e1a2c081319fd5000bea0c8f:Smash Game/Assets/CharacterController2D.cs
             {
                 canDoubleJump = false;
                 m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }
+<<<<<<< HEAD:Smash Game/Assets/Scripts/CharacterController2D.cs
     }
+=======
+        
+	}
+>>>>>>> 453b54d997de8a54e1a2c081319fd5000bea0c8f:Smash Game/Assets/CharacterController2D.cs
 
 
 	private void Flip()

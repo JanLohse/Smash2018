@@ -18,10 +18,11 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero;
+    private int extraJumps;
 
 	private void Awake()
 	{
-		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
 	}
 
 
@@ -37,6 +38,7 @@ public class CharacterController2D : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 m_Grounded = true;
+                canDoubleJump = true;
             }
 		}
 	}
@@ -86,24 +88,20 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
 		if (jump)
 		{
-			// Add a vertical force to the player.
-            if(m_Grounded)
+            // Add a vertical force to the player.
+            if (m_Grounded)
             {
                 m_Grounded = false;
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-                canDoubleJump = true;
             }
-            else
+            else if (canDoubleJump)
             {
-                if(canDoubleJump)
-                {
-                    canDoubleJump = false;
-                    m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-                    m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-                }
+                canDoubleJump = false;
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
-			
-		}
+        }
+        
 	}
 
 

@@ -7,6 +7,7 @@ public class menu : MonoBehaviour {
     public bool option_menu = false;
 
     public GameObject option_screen;
+    public AudioSource ButtonSound;
 
 	// Use this for initialization
 	void Start () {
@@ -20,20 +21,25 @@ public class menu : MonoBehaviour {
     void CheckOptionScreen(){
         if(option_menu == true){
             option_screen.SetActive (true);
+            ButtonSound.Play();
         } else{
             option_screen.SetActive(false);
         }
  }
      public void StartGame(){
-      SceneManager.LoadScene (1);
-	}
-
-    public void QuitGame() {
-            Application.Quit();
+        ButtonSound.Play();
+        SceneManager.LoadScene (1);
     }
 
-    public void Option(){
-            option_menu = true;
+    public void QuitGame() {
+        ButtonSound.Play();
+        Application.Quit();
+    }
+
+    public void Option()
+    {
+        ButtonSound.Play();
+        option_menu = true;
         }
 
     public void CloseOptionScreeen(){

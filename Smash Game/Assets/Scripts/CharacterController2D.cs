@@ -85,6 +85,10 @@ public class CharacterController2D : MonoBehaviour
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }
+        if (transform.position.y < -10)
+        {
+            transform.position = new Vector2(-2, -2);
+        }
     }
 
 

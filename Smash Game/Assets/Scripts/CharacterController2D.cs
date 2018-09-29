@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -18,10 +20,14 @@ public class CharacterController2D : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 velocity = Vector3.zero;
+    public int lifeCounter = 3;
+    public Text lifeText;
+    public int playernumber;
 
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        lifeText.text = "" + lifeCounter;
     }
 
 
@@ -88,6 +94,18 @@ public class CharacterController2D : MonoBehaviour
         if (transform.position.y < -10)
         {
             transform.position = new Vector2(-2, -2);
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+            transform.position = new Vector2(-2, -2);
+            lifeCounter--;
+            Debug.Log("leben" + lifeCounter);
+            lifeText.text = "" + lifeCounter;
+            if (lifeCounter < 1)
+            {
+                if (playernumber == 1)
+                    SceneManager.LoadScene(3);
+                else
+                    SceneManager.LoadScene(2);
+            }
         }
     }
 
@@ -102,4 +120,5 @@ public class CharacterController2D : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+    
 }

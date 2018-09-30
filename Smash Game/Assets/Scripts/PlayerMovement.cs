@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
 	public CharacterController2D controller;
 	public float runSpeed = 40f;
     public int playernumber;
+    public float factor = 1;
 
 	float horizontalMove = 0f;
 	bool jump = false;
@@ -32,11 +33,13 @@ public class PlayerMovement : MonoBehaviour {
                     {
                         if (controller.GetFacingRight() && distance.x < 0)
                         {
-                            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(3000f, 200f));
+                            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * factor, 50f * factor));
+                            factor += 0.5f  ;
                         }
                         else if (!controller.GetFacingRight() && distance.x > 0)
                         {
-                            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3000f, 200f));
+                            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * factor, 50f * factor));
+                            factor += 0.5f;
                         }
                     }
             }
@@ -47,6 +50,15 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
+        if (controller.isDead())
+        {
+            var players = GameObject.FindGameObjectsWithTag("Player")
+                                .Where(x => x != this.gameObject);
+            foreach (var player in players)
+            {
+                player.GetComponent<PlayerMovement>().factor = 1;
+            }
+        }
 		jump = false;
 	}
 }

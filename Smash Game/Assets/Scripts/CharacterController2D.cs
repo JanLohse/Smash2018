@@ -94,6 +94,10 @@ public class CharacterController2D : MonoBehaviour
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }
+    }
+
+    public bool isDead()
+    {
         if (transform.position.y < -10)
         {
             transform.position = new Vector2(-2, -2);
@@ -109,9 +113,10 @@ public class CharacterController2D : MonoBehaviour
                 else
                     SceneManager.LoadScene(2);
             }
+            return true;
         }
+        return false;
     }
-
 
     private void Flip()
     {

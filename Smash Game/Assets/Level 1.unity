@@ -1674,6 +1674,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 1892420787937326, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 70242907774875010, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 2}
     - {fileID: 114243888756026540, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 2}
@@ -2210,6 +2214,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1892420787937326, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 70242907774875010, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 2}
     - {fileID: 114243888756026540, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 2}
@@ -2467,6 +2475,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 1542391641}
   m_CeilingCheck: {fileID: 45764566}
   m_CrouchDisableCollider: {fileID: 774670388}
+  m_Rigidbody2D: {fileID: 0}
   lifeCounter: 3
   lifeText: {fileID: 2116743907}
   playernumber: 0
@@ -5598,6 +5607,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 351289720}
   m_CeilingCheck: {fileID: 1164603226}
   m_CrouchDisableCollider: {fileID: 1675643880}
+  m_Rigidbody2D: {fileID: 0}
   lifeCounter: 3
   lifeText: {fileID: 788780269}
   playernumber: 1

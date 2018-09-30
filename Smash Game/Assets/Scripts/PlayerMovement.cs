@@ -9,9 +9,12 @@ public class PlayerMovement : MonoBehaviour {
 	public float runSpeed = 40f;
     public int playernumber;
     public float factor = 1;
+    public AudioSource HitSound;
 
-	float horizontalMove = 0f;
+    float horizontalMove = 0f;
 	bool jump = false;
+   
+
     // Update is called once per frame
 	void Update () {
 
@@ -34,14 +37,20 @@ public class PlayerMovement : MonoBehaviour {
                         if (controller.GetFacingRight() && distance.x < 0)
                         {
                             player.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * factor, 50f * factor));
-                            factor += 0.5f  ;
+                            factor += 0.5f;
                         }
                         else if (!controller.GetFacingRight() && distance.x > 0)
                         {
                             player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * factor, 50f * factor));
                             factor += 0.5f;
                         }
+                        
+                        
                     }
+                    else
+                    {
+                    HitSound.Play(0);
+                }
             }
         }
 	}

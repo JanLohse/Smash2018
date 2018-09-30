@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -9,11 +10,17 @@ public class PlayerMovement : MonoBehaviour {
 	public float runSpeed = 40f;
     public int playernumber;
     public float factor = 1;
+    public Text factorText;
 
 	float horizontalMove = 0f;
 	bool jump = false;
     // Update is called once per frame
-	void Update () {
+
+    private void Awake()
+    {
+        factorText.text = "" + factor + "x";
+    }
+    void Update () {
 
 		horizontalMove = Input.GetAxisRaw("Horizontal_P"+playernumber) * runSpeed;
 
@@ -35,12 +42,14 @@ public class PlayerMovement : MonoBehaviour {
                         {
                             player.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * factor, 50f * factor));
                             factor += 0.5f  ;
-                        }
+                            factorText.text = "" + factor + "x";
+                    }
                         else if (!controller.GetFacingRight() && distance.x > 0)
                         {
                             player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * factor, 50f * factor));
                             factor += 0.5f;
-                        }
+                            factorText.text = "" + factor + "x";
+                    }
                     }
             }
         }
@@ -57,6 +66,8 @@ public class PlayerMovement : MonoBehaviour {
             foreach (var player in players)
             {
                 player.GetComponent<PlayerMovement>().factor = 1;
+                player.GetComponent<PlayerMovement>().factorText.text = "" + player.GetComponent<PlayerMovement>().factor + "x";
+
             }
         }
 		jump = false;

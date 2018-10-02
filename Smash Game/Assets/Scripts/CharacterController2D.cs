@@ -23,6 +23,9 @@ public class CharacterController2D : MonoBehaviour
     public int lifeCounter = 3;
     public Text lifeText;
     public int playernumber;
+    public AudioSource dead;
+    public AudioSource jumpSound;
+
 
     private void Awake()
     {
@@ -86,12 +89,14 @@ public class CharacterController2D : MonoBehaviour
                 m_Grounded = false;
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
                 canDoubleJump = true;
+                jumpSound.Play();
             }
             else if (canDoubleJump)
             {
                 canDoubleJump = false;
                 m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                jumpSound.Play();
             }
         }
     }
@@ -100,11 +105,27 @@ public class CharacterController2D : MonoBehaviour
     {
         if (transform.position.y < -10)
         {
-            transform.position = new Vector2(-2, -2);
+            dead.Play();
+            switch (Random.Range(1,6))
+            {
+                case 1:
+                    transform.position = new Vector2(-10f, 5f);
+                    break;
+                case 2:
+                    transform.position = new Vector2(0.5f, 4f);
+                    break;
+                case 3:
+                    transform.position = new Vector2(9f, 5.5f);
+                    break;
+                case 4:
+                    transform.position = new Vector2(-6.3f, 1f);
+                    break;
+                case 5:
+                    transform.position = new Vector2(7.5f, 1f);
+                    break;
+            }
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-            transform.position = new Vector2(-2, -2);
             lifeCounter--;
-            Debug.Log("leben" + lifeCounter);
             lifeText.text = "" + lifeCounter;
             if (lifeCounter < 1)
             {

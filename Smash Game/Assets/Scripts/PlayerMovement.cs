@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
+
+    //BITTE KOMMENTIEREN DANKE JUNGS
+
+
 	public CharacterController2D controller;
 	public float runSpeed = 40f;
     public int playernumber;
@@ -13,10 +17,19 @@ public class PlayerMovement : MonoBehaviour {
     public Text factorText;
     public AudioSource HitSound;
     public AudioSource MissSound;
+    private screenshake shake;
 
 	float horizontalMove = 0f;
 	bool jump = false;
     // Update is called once per frame
+
+
+
+    void Start()
+    {
+        //Screenshake
+        shake = GameObject.FindGameObjectWithTag("screenshake").GetComponent<screenshake>();
+    }
 
     private void Awake()
     {
@@ -46,6 +59,24 @@ public class PlayerMovement : MonoBehaviour {
                         factor += 0.5f  ;
                         factorText.text = "" + factor + "x";
                         HitSound.Play(0);
+
+                        //Einführen von Screenshake - in den Klammern steht die Stärke des Shakes
+                        if (factor<3.5f)
+                        {
+                            shake.camShake("normal");
+                        }
+                        else if(factor<7.5f)
+                        {
+                            shake.camShake("stronger");
+                        }
+                        else if(factor<13f)
+                        {
+                            shake.camShake("omega");
+                        }
+                        else if(factor>=13f)
+                        {
+                            shake.camShake("omega_stronger");
+                        }
                     }
                     else if (!controller.GetFacingRight() && distance.x > 0)
                     {
@@ -53,6 +84,24 @@ public class PlayerMovement : MonoBehaviour {
                         factor += 0.5f;
                         factorText.text = "" + factor + "x";
                         HitSound.Play(0);
+
+                        //Einführen von Screenshake - in den Klammern steht die Stärke des Shakes
+                        if (factor < 3.5f)
+                        {
+                            shake.camShake("normal");
+                        }
+                        else if (factor < 7.5f)
+                        {
+                            shake.camShake("stronger");
+                        }
+                        else if (factor < 13f)
+                        {
+                            shake.camShake("omega");
+                        }
+                        else if (factor >= 13f)
+                        {
+                            shake.camShake("omega_stronger");
+                        }
                     }
                     else
                     {

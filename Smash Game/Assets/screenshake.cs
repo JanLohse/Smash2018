@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class screenshake : MonoBehaviour {
 
-	public IEnumerator Shake (float duration, float magnitude)
+    public Animator anim;
+
+    public void camShake(string i)
     {
-        Vector3 originalPos = transform.localPosition;
-
-        float elapsed = 0.0f;
-
-        while(elapsed < duration)
+        if(i == "normal")
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-
-            transform.localPosition = new Vector3(x, y, originalPos.z);
-
-            elapsed += Time.deltaTime;
-
-            yield return null;
+            anim.SetTrigger("shake");
         }
-
-        transform.localPosition = originalPos;
-
+        else if(i == "stronger")
+        {
+            anim.SetTrigger("shake_stronger");
+        }
+        else if(i == "omega")
+        {
+            anim.SetTrigger("shake_omega");
+        }
+        else if(i == "omega_stronger")
+        {
+            anim.SetTrigger("shake_omega_stronger");
+        }
     }
+    
 }

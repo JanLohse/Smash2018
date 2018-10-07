@@ -22,6 +22,7 @@ public class menu : MonoBehaviour {
         if(option_menu == true){
             option_screen.SetActive (true);
             ButtonSound.Play();
+            option_menu = false;
         } else{
             option_screen.SetActive(false);
         }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class menu : MonoBehaviour {
     public bool option_menu = false;
+    private bool played_menu = false;
 
     public GameObject option_screen;
     public AudioSource ButtonSound;
@@ -21,10 +22,18 @@ public class menu : MonoBehaviour {
     void CheckOptionScreen(){
         if(option_menu == true){
             option_screen.SetActive (true);
-            ButtonSound.Play();
-            option_menu = false;
+            if (!played_menu)
+            {
+                ButtonSound.Play();
+                played_menu = true;
+            }
         } else{
             option_screen.SetActive(false);
+            if (played_menu)
+            {
+                ButtonSound.Play();
+                played_menu = false;
+            }
         }
  }
      public void StartGame(){

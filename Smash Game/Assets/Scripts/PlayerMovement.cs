@@ -36,7 +36,9 @@ public class PlayerMovement : MonoBehaviour {
         factorText.text = "" + factor + "x";
         
     }
-    void Update () {
+
+    void Update ()
+    {
 
 		horizontalMove = Input.GetAxisRaw("Horizontal_P"+playernumber) * runSpeed;
 
@@ -44,77 +46,12 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			jump = true;
 		}
-        if (Input.GetButtonDown("Fire_P"+playernumber))
+        if (Input.GetButtonDown("Fire_P" + playernumber))
         {
-            var players = GameObject.FindGameObjectsWithTag("Player")
-                                .Where(x => x != this.gameObject);
-            foreach(var player in players)
-            {
-                Vector2 distance = transform.position-player.transform.position;
-                if(distance.magnitude < 1)
-                {
-                    if (controller.GetFacingRight() && distance.x < 0)
-                    {
-                        player.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * factor, 50f * factor));
-                        factor += 0.5f  ;
-                        factorText.text = "" + factor + "x";
-                        HitSound.Play(0);
-
-                        //Einführen von Screenshake - in den Klammern steht die Stärke des Shakes
-                        if (factor<3.5f)
-                        {
-                            shake.camShake("normal");
-                        }
-                        else if(factor<7.5f)
-                        {
-                            shake.camShake("stronger");
-                        }
-                        else if(factor<13f)
-                        {
-                            shake.camShake("omega");
-                        }
-                        else if(factor>=13f)
-                        {
-                            shake.camShake("omega_stronger");
-                        }
-                    }
-                    else if (!controller.GetFacingRight() && distance.x > 0)
-                    {
-                        player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * factor, 50f * factor));
-                        factor += 0.5f;
-                        factorText.text = "" + factor + "x";
-                        HitSound.Play(0);
-
-                        //Einführen von Screenshake - in den Klammern steht die Stärke des Shakes
-                        if (factor < 3.5f)
-                        {
-                            shake.camShake("normal");
-                        }
-                        else if (factor < 7.5f)
-                        {
-                            shake.camShake("stronger");
-                        }
-                        else if (factor < 13f)
-                        {
-                            shake.camShake("omega");
-                        }
-                        else if (factor >= 13f)
-                        {
-                            shake.camShake("omega_stronger");
-                        }
-                    }
-                    else
-                    {
-                        MissSound.Play(0);
-                    }
-                }
-                else
-                {
-                    MissSound.Play(0);
-                }
-            }
+            Hit();
         }
 	}
+        
 
 	void FixedUpdate ()
 	{
@@ -133,4 +70,62 @@ public class PlayerMovement : MonoBehaviour {
         }
 		jump = false;
 	}
+
+    private void Hit ()
+    {
+        var players = GameObject.FindGameObjectsWithTag("Player")
+                            .Where(x => x != this.gameObject);
+        foreach (var player in players)
+        {
+            Vector2 distance = transform.position - player.transform.position;
+            if (distance.magnitude < 1)
+            {
+                if (controller.GetFacingRight() && distance.x < 0)
+                {
+                    player.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * factor, 50f * factor));
+                    factor += 0.5f;
+                    factorText.text = "" + factor + "x";
+                    HitSound.Play(0);
+                    shakeScreen();
+                }
+                else if (!controller.GetFacingRight() && distance.x > 0)
+                {
+                    player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * factor, 50f * factor));
+                    factor += 0.5f;
+                    factorText.text = "" + factor + "x";
+                    HitSound.Play(0);
+                    shakeScreen();
+                }
+                else
+                {
+                    MissSound.Play(0);
+                }
+            }
+            else
+            {
+                MissSound.Play(0);
+            }
+        }
+    }
+
+    private void shakeScreen()
+    {
+        if (factor < 3.5f)
+        {
+            shake.camShake("normal");
+        }
+        else if (factor < 7.5f)
+        {
+            shake.camShake("stronger");
+        }
+        else if (factor < 13f)
+        {
+            shake.camShake("omega");
+        }
+        else if (factor >= 13f)
+        {
+            shake.camShake("omega_stronger");
+        }
+    }
 }
+

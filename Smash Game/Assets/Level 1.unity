@@ -4718,7 +4718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_JumpForce: 750
   m_CrouchSpeed: 0.4
-  m_MovementSmoothing: 0.05
+  m_MovementSmoothing: 0.1
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
@@ -4744,9 +4744,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 774670386}
-  runSpeed: 40
+  runSpeed: 45
   playernumber: 2
-  factor: 1
+  damage: 1
+  factor: 1.5
   factorText: {fileID: 333643346}
   HitSound: {fileID: 1165287470}
   MissSound: {fileID: 244206143}
@@ -9569,9 +9570,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1675643883}
-  runSpeed: 40
+  runSpeed: 45
   playernumber: 1
-  factor: 1
+  damage: 1
+  factor: 1.5
   factorText: {fileID: 842409202}
   HitSound: {fileID: 1165287470}
   MissSound: {fileID: 244206143}
@@ -9588,7 +9590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_JumpForce: 750
   m_CrouchSpeed: 0.4
-  m_MovementSmoothing: 0.05
+  m_MovementSmoothing: 0.1
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
